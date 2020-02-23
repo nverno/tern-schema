@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JSON schema for tern .tern-project and .tern-config files",
+  "$defs": {
+    "plugin": {
+      "description": "Plugins are JavaScript programs that add extra functionality to a server.",
+      "type": "object",
+      "additionalProperties": true
+    },
+    "lib": {
+      "description": "The libs property refers to the JSON type descriptions that should be loaded into the environment for this project.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "plugins": {
+      "$ref": "#/$defs/plugin",
+      "type": "object",
+      "properties": {
+        "node": {
+          "type": "object",
+          "properties": {
+            "dontLoad": { "type": "string" },
+            "load": { "type": "string" },
+            "modules": { "type": "string" }
+          }
+        },
+        "node_resolve": { "type": "object" },
+        "modules": { "type": "object" },
+        "es_modules": { "type": "object" },
+        "requirejs": {
+          "type": "object",
+          "properties": {
+            "baseURL": {
+              "type": "string",
+              "format": "uri"
+            },
+            "paths": {
+              "type": "string",
+              "format": "uri"
+            },
+            "override": { "type": "string" }
+          }
+        },
+        "commonjs": { "type": "object" },
+        "require": { "type": "object" },
+        "doc_comment": { "type": ["boolean", "number"] }
+      }
+    },
+    "loadEagerly": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "dontLoad": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "libs": {
+      "$ref": "#/$defs/lib",
+      "type": "array",
+      "properties": {
+        "ecmascript": { "type": "string" },
+        "browser": { "type":"string" },
+        "jquery": { "type":"string" },
+        "lodash": { "type":"string" },
+        "react": { "type":"string" }
+      }
+    }
+  }
+}
